@@ -1,81 +1,326 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title>LSV</title>
-		<link rel="stylesheet" href="css/style.css" />
-		<script src="js/jquery.mobile-1.3.2.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<script>
+			// Global declarations - assignments made in $(document).ready() below
+			var contentMainVar = null;
+			var contentTransitionVar = null;
+			var stateLabelVar = null;
+			var whatLabelVar = null;
+			var stateVar = null;
+			var whatVar = null;
+			var form1var = null;
+			var confirmationVar = null;
+			var contentDialogVar = null;
+			var hdrConfirmationVar = null;
+			var contentConfirmationVar = null;
+			var ftrConfirmationVar = null;
+			var inputMapVar = null;
+
+			// Constants
+			var MISSING = "missing";
+			var EMPTY = "";
+			var NO_STATE = "ZZ";
+		</script>
 	</head>
 	<body>
-		<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1" data-url="panel-fixed-page1">
-    <div data-role="header" data-theme="f" data-position="fixed">
-        <h1>Fixed header</h1>
-        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
-    </div><!-- /header -->
-    <div data-role="content" class="jqm-content">
-        <h1>Panels</h1>
-        <h2>Fixed positioning</h2>
-        <p>This is a typical page that has two buttons in the header bar that open panels. The left panel has the reveal display mode. The right panel opens as overlay. For both panels we set <code>data-position-fixed="true"</code>. We also set position fixed for the header and footer on this page.</p>
-        <p>The left panel contains a long menu to demonstrate that the framework will check the panel contents height and unfixes the panel so its content can be scrolled. In the right panel there is a short form that shows the fixed positioning.</p>
-        <h2>Responsive</h2>
-        <p>To make this responsive, you can make the page re-flow at wider widths. This allows both the reveal panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
-        <a href="./" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Panels</a>
-        <div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
-    </div><!-- /content -->
-    <div data-role="footer" data-position="fixed" data-theme="f">
-        <h4>Fixed footer</h4>
-    </div><!-- /footer -->
-    <div data-role="panel" data-position-fixed="true" data-theme="a" id="nav-panel">
-        <ul data-role="listview" data-theme="a" class="nav-search">
-            <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-                <li><a href="#panel-fixed-page2">Accordion</a></li>
-                <li><a href="#panel-fixed-page2">AJAX Navigation</a></li>
-                <li><a href="#panel-fixed-page2">Autocomplete</a></li>
-                <li><a href="#panel-fixed-page2">Buttons</a></li>
-                <li><a href="#panel-fixed-page2">Checkboxes</a></li>
-                <li><a href="#panel-fixed-page2">Collapsibles</a></li>
-                <li><a href="#panel-fixed-page2">Controlgroup</a></li>
-                <li><a href="#panel-fixed-page2">Dialogs</a></li>
-                <li><a href="#panel-fixed-page2">Fixed toolbars</a></li>
-                <li><a href="#panel-fixed-page2">Flip switch toggle</a></li>
-                <li><a href="#panel-fixed-page2">Footer toolbar</a></li>
-                <li><a href="#panel-fixed-page2">Form elements</a></li>
-                <li><a href="#panel-fixed-page2">Grids</a></li>
-                <li><a href="#panel-fixed-page2">Header toolbar</a></li>
-                <li><a href="#panel-fixed-page2">Icons</a></li>
-                <li><a href="#panel-fixed-page2">Links</a></li>
-                <li><a href="#panel-fixed-page2">Listviews</a></li>
-                <li><a href="#panel-fixed-page2">Loader overlay</a></li>
-                <li><a href="#panel-fixed-page2">Navbar</a></li>
-                <li><a href="#panel-fixed-page2">Navbar, persistent</a></li>
-                <li><a href="#panel-fixed-page2">Pages</a></li>
-                <li><a href="#panel-fixed-page2">New</a></li>
-                <li><a href="#panel-fixed-page2">Popup</a></li>
-                <li><a href="#panel-fixed-page2">Radio buttons</a></li>
-                <li><a href="#panel-fixed-page2">Select</a></li>
-                <li><a href="#panel-fixed-page2">Slider, single</a></li>
-                <li><a href="#panel-fixed-page2">New</a></li>
-                <li><a href="#panel-fixed-page2">New</a></li>
-                <li><a href="#panel-fixed-page2">New</a></li>
-                <li><a href="#panel-fixed-page2">Text inputs & textarea</a></li>
-                <li><a href="#panel-fixed-page2">Transitions</a></li>
-        </ul>
-    </div><!-- /panel -->
-    <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
-        <form class="userform">
-            <h2>Login</h2>
-            <label for="name">Username:</label>
-            <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
-            <div class="ui-grid-a">
-                <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Cancel</a></div>
-                <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Save</a></div>
-            </div>
-        </form>
-    </div><!-- /panel -->
-</div>
+		<!-- startpage Anfang -->
+
+		<div data-role="page" id="startpage">
+			<div data-role="panel" id="mypanel" data-position-fixed="true" data-display="push">
+				<div class="ui-panel-inner">
+					<a href="#startpage" data-transition="none">Start</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#guide" data-transition="none">SV-Guide</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#was" data-transition="none">Was ist die LSV/KSV?</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#fragen" data-transition="none">Fragen an die LSV</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#my-header" data-rel="close">Close panel</a>
+				</div>
+			</div>
+			<div data-role="header">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" data-shadow="false"></a>
+				<h1>LSV</h1>
+			</div>
+
+			<div data-role="content">
+				<p>
+					Inhalt oder auch nicht ;D
+				</p>
+			</div>
+
+			<div data-role="footer" class="ui-bar">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="https://www.facebook.com/lsv.thueringen" data-role="button" data-icon="plus">Facebook</a>
+					<a href="http://lsv-thueringen.de/" data-role="button" data-icon="plus">Website</a>
+				</div>
+			</div>
+		</div>
+		<!-- startpage Ende -->
+		<!-- guide Anfang -->
+		<div data-role="page" id="guide">
+			<div data-role="panel" id="mypanel" data-position-fixed="true" data-display="push">
+				<div class="ui-panel-inner">
+					<a href="#startpage" data-transition="none">Start</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#guide" data-transition="none">SV-Guide</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#was" data-transition="none">Was ist die LSV/KSV?</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#fragen" data-transition="none">Fragen an die LSV</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#my-header" data-rel="close">Close panel</a>
+				</div>
+			</div>
+			<div data-role="header">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" data-shadow="false"></a>
+				<h1>LSV</h1>
+			</div>
+
+			<div data-role="content">
+				<ul data-role="listview" data-autodividers="true" data-filter="true" data-inset="true">
+					<li>
+						<a href="index.html">Hier</a>
+					</li>
+					<li>
+						<a href="index.html">muss</a>
+					</li>
+					<li>
+						<a href="index.html">noch</a>
+					</li>
+					<li>
+						<a href="index.html">Inhalt</a>
+					</li>
+					<li>
+						<a href="index.html">rein</a>
+					</li>
+					<li>
+						<a href="index.html">kommen</a>
+					</li>
+				</ul>
+			</div>
+
+			<div data-role="footer" class="ui-bar">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="https://www.facebook.com/lsv.thueringen" data-role="button" data-icon="plus">Facebook</a>
+					<a href="http://lsv-thueringen.de/" data-role="button" data-icon="plus">Website</a>
+				</div>
+			</div>
+		</div>
+		<!-- guide Ende -->
+		<!-- fragen Anfang -->
+		<div data-role="page" data-theme="b" id="fragen">
+
+			<div data-role="panel" id="mypanel" data-position-fixed="true" data-display="push">
+				<div class="ui-panel-inner">
+					<a href="#startpage" data-transition="none">Start</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#guide" data-transition="none">SV-Guide</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#was" data-transition="none">Was ist die LSV/KSV?</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#fragen" data-transition="none">Fragen an die LSV</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#my-header" data-rel="close">Close panel</a>
+				</div>
+			</div>
+			<div data-role="header">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" data-shadow="false"></a>
+				<h1>LSV</h1>
+			</div>
+
+			<div data-role="content" id="contentMain" name="contentMain">
+
+				<form id="form1">
+
+					<div id="vornameDiv" data-role="fieldcontain">
+						<label for="vorname">Vorname</label>
+						<input id="vorname" name="vorname" type="text" />
+					</div>
+
+					<div id="nachnameDiv" data-role="fieldcontain">
+						<label for="nachname" id="fnameLabel" name="fnameLabel">Nachname</label>
+						<input id="nachname" name="nachname" type="text" />
+					</div>
+
+					<div id="mailDiv" data-role="fieldcontain">
+						<label for="mail">Email</label>
+						<input id="mail" name="mail" type="text" />
+					</div>
+
+					<div id="betreffDiv" data-role="fieldcontain">
+						<label for="betreff">Betreff</label>
+						<input id="betreff" name="betreff" type="text" />
+					</div>
+
+					<div id="questiondiv" data-role="fieldcontain">
+						<label for="question">Frage</label>
+						<input id="question" name="question" type="text"/>
+					</div>
+
+					<div id="submitDiv" data-role="fieldcontain">
+						<input type="submit" value="Submit Claim" data-inline="true"/>
+					</div>
+				</form>
+			</div><!-- contentMain -->
+			<div align="CENTER" data-role="content" id="contentDialog" name="contentDialog">
+				<div>
+					Fülle das Formular aus.
+				</div>
+				<a id="buttonOK" name="buttonOK" href="#fragen" data-role="button" data-inline="true">OK</a>
+			</div>
+			<!-- contentDialog -->
+			<div data-role="content" id="contentTransition" name="contentTransition">
+					<h4>Deine Frage wurde gesendet.</h4>
+					<a href="fragen" data-role="button" id="nochmal">Neue Frage</a>
+			</div>
+
+			<div data-role="footer" class="ui-bar">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="https://www.facebook.com/lsv.thueringen" data-role="button" data-icon="plus">Facebook</a>
+					<a href="http://lsv-thueringen.de/" data-role="button" data-icon="plus">Website</a>
+				</div>
+			</div>
+
+			<!-- contentTransition is displayed after the form is submitted until a response is received back. -->
+
+			<!-- contentTransition -->
+
+			<script>
+				$(document).ready(function() {
+					// Assign global variables
+					contentMainVar = $('#contentMain');
+					contentTransitionVar = $('#contentTransition');
+					stateLabelVar = $('#stateLabel');
+					whatLabelVar = $('#whatLabel');
+					stateVar = $('#state');
+					whatVar = $('#what');
+					form1Var = $('#form1');
+					confirmationVar = $('#confirmation');
+					contentDialogVar = $('#contentDialog');
+					hdrConfirmationVar = $('#hdrConfirmation');
+					contentConfirmationVar = $('#contentConfirmation');
+					ftrConfirmationVar = $('#ftrConfirmation');
+					inputMapVar = $('input[name*="_r"]');
+
+					hideContentDialog();
+					hideContentTransition();
+					hideConfirmation();
+				});
+
+				$('#buttonOK').click(function() {
+					hideContentDialog();
+					showMain();
+					return false;
+				});
+				$('#nochmal').click(function() {
+					hideContentTransition();
+					showMain();
+					return false;
+				});
+
+				$('#form1').submit(function() {
+					var err = false;
+					// Hide the Main content
+					hideMain();
+
+					// If validation passes, show Transition content
+					showContentTransition();
+
+					// Submit the form
+					$.post("http://www.lsv-thueringen.de/appmail.php", form1Var.serialize(), function(data) {
+						confirmationVar.text(data);
+						hideContentTransition();
+						showConfirmation();
+					});
+					return false;
+				});
+
+				function hideMain() {
+					contentMainVar.hide();
+				}
+
+				function showMain() {
+					contentMainVar.show();
+				}
+
+				function hideContentTransition() {
+					contentTransitionVar.hide();
+				}
+
+				function showContentTransition() {
+					contentTransitionVar.show();
+				}
+
+				function hideContentDialog() {
+					contentDialogVar.hide();
+				}
+
+				function showContentDialog() {
+					contentDialogVar.show();
+				}
+
+
+			</script>
+		</div>
+		<!-- fragen Ende -->
+				<!-- was Anfang -->
+
+		<div data-role="page" id="was">
+			<div data-role="panel" id="mypanel" data-position-fixed="true" data-display="push">
+				<div class="ui-panel-inner">
+					<a href="#startpage" data-transition="none">Start</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#guide" data-transition="none">SV-Guide</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#was" data-transition="none">Was ist die LSV/KSV?</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#fragen" data-transition="none">Fragen an die LSV</a>
+				</div>
+				<div class="ui-panel-inner">
+					<a href="#my-header" data-rel="close">Close panel</a>
+				</div>
+			</div>
+			<div data-role="header">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" data-shadow="false"></a>
+				<h1>LSV</h1>
+			</div>
+
+			<div data-role="content">
+				<p>
+					Hier könnte bald auch etwas stehen  ;D
+				</p>
+			</div>
+
+			<div data-role="footer" class="ui-bar">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="https://www.facebook.com/lsv.thueringen" data-role="button" data-icon="plus">Facebook</a>
+					<a href="http://lsv-thueringen.de/" data-role="button" data-icon="plus">Website</a>
+				</div>
+			</div>
+		</div>
+		<!-- was Ende -->
 	</body>
 </html>

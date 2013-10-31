@@ -8,7 +8,10 @@
 * http://jquery.org/license
 *
 */
-
+label.missing  {
+	color:#FF0000;
+	font-weight:bold;
+}
 
 /* some unsets - more probably needed */
 .ui-mobile, .ui-mobile body { height: 99.9%; }
